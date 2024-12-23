@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Müşteri Kayıp Analizi</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Müşteri Kayıp Analizi</h1>
+        <!-- Form to capture input data for prediction -->
+        <form action="/predict" method="post">
+            <legend>Müşteri Kayıp Analizi</legend>
+            
+            <!-- Gender Input -->
+            <div class="form-group">
+                <label class="form-label">Cinsiyet</label>
+                <select class="form-control" name="query4" required>
+                    <option selected disabled value="">Cinsiyet Seçin</option>
+                    <option value="male" selected>Erkek</option>
+                    <option value="female">Kadın</option>
+                </select>
+            </div>
+
+            <!-- SeniorCitizen Input (1 or 0) -->
+            <div class="form-group">
+                <label class="form-label">Yaşlı Vatandaş</label>
+                <select class="form-control" name="query1" required>
+                    <option selected disabled value="">Müşteri yaşlı mı?</option>
+                    <option value="1">Evet</option>
+                    <option value="0" selected>Hayır</option>
+                </select>
+            </div>
+
+            <!-- MonthlyCharges Input -->
+            <div class="form-group">
+                <label class="form-label">Aylık Ücret</label>
+                <input type="number" class="form-control" name="query2" value="50" required>
+            </div>
+
+            <!-- TotalCharges Input -->
+            <div class="form-group">
+                <label class="form-label">Toplam Ücret</label>
+                <input type="number" class="form-control" name="query3" value="500" required>
+            </div>
+
+            <!-- Partner Input -->
+            <div class="form-group">
+                <label class="form-label">Partner</label>
+                <select class="form-control" name="query5" required>
+                    <option selected disabled value="">Müşteri partner mi?</option>
+                    <option value="yes" selected>Evet</option>
+                    <option value="no">Hayır</option>
+                </select>
+            </div>
+
+            <!-- Dependents Input -->
+            <div class="form-group">
+                <label class="form-label">Bağımlılar</label>
+                <select class="form-control" name="query6" required>
+                    <option selected disabled value="">Müşterinin bağımlıları var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                </select>
+            </div>
+
+            <!-- PhoneService Input -->
+            <div class="form-group">
+                <label class="form-label">Telefon Hizmeti</label>
+                <select class="form-control" name="query7" required>
+                    <option selected disabled value="">Müşterinin telefon hizmeti var mı?</option>
+                    <option value="yes" selected>Evet</option>
+                    <option value="no">Hayır</option>
+                </select>
+            </div>
+
+            <!-- MultipleLines Input -->
+            <div class="form-group">
+                <label class="form-label">Çoklu Hatlar</label>
+                <select class="form-control" name="query8" required>
+                    <option selected disabled value="">Müşterinin çoklu hatları var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                    <option value="no phone service">Telefon hizmeti yok</option>
+                </select>
+            </div>
+
+            <!-- InternetService Input -->
+            <div class="form-group">
+                <label class="form-label">İnternet Hizmeti</label>
+                <select class="form-control" name="query9" required>
+                    <option selected disabled value="">İnternet Hizmeti Seçin</option>
+                    <option value="dsl" selected>DSL</option>
+                    <option value="fiber optic">Fiber optik</option>
+                    <option value="no">Hayır</option>
+                </select>
+            </div>
+
+            <!-- OnlineSecurity Input -->
+            <div class="form-group">
+                <label class="form-label">Çevrimiçi Güvenlik</label>
+                <select class="form-control" name="query10" required>
+                    <option selected disabled value="">Müşterinin çevrimiçi güvenliği var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                    <option value="no internet service">İnternet hizmeti yok</option>
+                </select>
+            </div>
+
+            <!-- OnlineBackup Input -->
+            <div class="form-group">
+                <label class="form-label">Çevrimiçi Yedekleme</label>
+                <select class="form-control" name="query11" required>
+                    <option selected disabled value="">Müşterinin çevrimiçi yedeklemesi var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                    <option value="no internet service">İnternet hizmeti yok</option>
+                </select>
+            </div>
+
+            <!-- DeviceProtection Input -->
+            <div class="form-group">
+                <label class="form-label">Cihaz Koruması</label>
+                <select class="form-control" name="query12" required>
+                    <option selected disabled value="">Müşterinin cihaz koruması var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                    <option value="no internet service">İnternet hizmeti yok</option>
+                </select>
+            </div>
+
+            <!-- TechSupport Input -->
+            <div class="form-group">
+                <label class="form-label">Teknik Destek</label>
+                <select class="form-control" name="query13" required>
+                    <option selected disabled value="">Müşterinin teknik desteği var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                    <option value="no internet service">İnternet hizmeti yok</option>
+                </select>
+            </div>
+
+            <!-- StreamingTV Input -->
+            <div class="form-group">
+                <label class="form-label">Yayın TV</label>
+                <select class="form-control" name="query14" required>
+                    <option selected disabled value="">Müşterinin yayın TV'si var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                    <option value="no internet service">İnternet hizmeti yok</option>
+                </select>
+            </div>
+
+            <!-- StreamingMovies Input -->
+            <div class="form-group">
+                <label class="form-label">Yayın Filmleri</label>
+                <select class="form-control" name="query15" required>
+                    <option selected disabled value="">Müşterinin yayın filmleri var mı?</option>
+                    <option value="yes">Evet</option>
+                    <option value="no" selected>Hayır</option>
+                    <option value="no internet service">İnternet hizmeti yok</option>
+                </select>
+            </div>
+
+            <!-- Contract Input -->
+            <div class="form-group">
+                <label class="form-label">Sözleşme</label>
+                <select class="form-control" name="query16" required>
+                    <option selected disabled value="">Sözleşme Seçin</option>
+                    <option value="month-to-month" selected>Aydan aya</option>
+                    <option value="one year">Bir yıl</option>
+                    <option value="two year">İki yıl</option>
+                </select>
+            </div>
+
+            <!-- PaperlessBilling Input -->
+            <div class="form-group">
+                <label class="form-label">Kağıtsız Faturalama</label>
+                <select class="form-control" name="query17" required>
+                    <option selected disabled value="">Müşterinin kağıtsız faturalaması var mı?</option>
+                    <option value="yes" selected>Evet</option>
+                    <option value="no">Hayır</option>
+                </select>
+            </div>
+
+            <!-- PaymentMethod Input -->
+            <div class="form-group">
+                <label class="form-label">Ödeme Yöntemi</label>
+                <select class="form-control" name="query18" required>
+                    <option selected disabled value="">Ödeme Yöntemi Seçin</option>
+                    <option value="electronic check" selected>Elektronik çek</option>
+                    <option value="mailed check">Posta çeki</option>
+                    <option value="bank transfer (automatic)">Banka transferi (otomatik)</option>
+                    <option value="credit card (automatic)">Kredi kartı (otomatik)</option>
+                </select>
+            </div>
+
+            <!-- Tenure Input -->
+            <div class="form-group">
+                <label class="form-label">Kıdem</label>
+                <input type="number" class="form-control" name="query19" value="12" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Tahmin Et</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
